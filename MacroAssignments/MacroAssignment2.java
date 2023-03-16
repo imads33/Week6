@@ -90,7 +90,7 @@ public class MacroAssignment2 {
             System.out.println("please select..");
             int choice = psale.sc.nextInt();
             if (choice == 4) {
-                System.out.println("Thank you..");
+                System.out.println("Terminated..");
                 break;
             }
             switch (choice) {
