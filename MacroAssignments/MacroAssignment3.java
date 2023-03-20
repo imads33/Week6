@@ -1,12 +1,11 @@
-
 /*
 Restaurant: Create a class called "Dish" that represents a dish. 
 The class should have properties such as name, ingredients, and price, 
 and methods such as getName, getIngredients, and getPrice. 
 Create another class called "Restaurant" that represents a restaurant. 
 The class should have a list of dishes, and methods such as addDish, removeDish, and getTotalCost
-
 */
+
 import java.util.Scanner;
 
 class Dish {
@@ -26,26 +25,27 @@ class Dish {
     }
 
     String getName() {
-        return name;
+        return this.name;
     }
 
     double getPrice() {
-        return price;
+        return this.price;
     }
 
     String getIngredients() {
-        return ingredients;
+        return this.ingredients;
     }
 }
 
 class Restaurant {
     Scanner sc = new Scanner(System.in);
     Dish dish[] = new Dish[5];
-    Dish dishs = new Dish();
     int noOfDishes = 0;
 
     void addDish() {
+        Dish dishs = new Dish();
         System.out.println("Enter Dish name : ");
+        sc.nextLine();
         dishs.setName(sc.nextLine());
         System.out.println("Enter Dish ingrediants : ");
         dishs.setIngredients(sc.nextLine());
@@ -57,11 +57,12 @@ class Restaurant {
 
     void removeDish() {
         System.out.println("Enter Dish name to remove: ");
+        sc.nextLine();
         String name = sc.nextLine();
         int index = 0;
         for (int i = 0; i < noOfDishes; i++) {
             Dish dishs = (Dish) dish[i];
-            if (dishs.getName() == name) {
+            if (name.equals(dishs.getName())) {
                 index = i;
                 break;
             }
@@ -74,18 +75,31 @@ class Restaurant {
 
     void getTotalCost() {
         System.out.println("Enter Dish name: ");
+        sc.nextLine();
         String name = sc.nextLine();
         System.out.println("Enter Dish quantity : ");
         int quantity = sc.nextInt();
         double totalCost = 0;
+        System.out.println("name : " + name);
         for (int i = 0; i < noOfDishes; i++) {
-            Dish dishs = (Dish) dish[i];
-            if (dishs.getName() == name) {
-                totalCost = dishs.getPrice() * quantity;
+            Dish d = (Dish) dish[i];
+            System.out.println("gwd : " + d.getName());
+            if (d.getName().equals(name)) {
+                totalCost = quantity * d.getPrice();
+                System.out.println("Total Cost is : " + totalCost);
+                break;
             }
         }
-        System.out.println("Total Cost is : " + totalCost);
     }
+
+    void display() {
+        for (int i = 0; i < noOfDishes; i++) {
+            Dish dishs = (Dish) dish[i];
+            System.out.println("Name : " + dishs.getName() + " ingredients " + dishs.getIngredients() + " price "
+                    + dishs.getPrice());
+        }
+    }
+
 }
 
 public class MacroAssignment3 {
@@ -102,9 +116,11 @@ public class MacroAssignment3 {
             switch (choice) {
                 case 1:
                     rest.addDish();
+                    rest.display();
                     break;
                 case 2:
                     rest.removeDish();
+                    rest.display();
                     break;
                 case 3:
                     rest.getTotalCost();
